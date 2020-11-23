@@ -1,6 +1,7 @@
 import asyncio
+import time
 
-async def tcp_echo_client(message):
+async def tcp_echo_client():
     reader, writer = await asyncio.open_connection(
         '127.0.0.1', 8888)
 
@@ -8,9 +9,12 @@ async def tcp_echo_client(message):
     # writer.write(message.encode())
 
     data = await reader.read(100)
-    print(f'Received: {data.decode()!r}')
+    print(f'Received: {data!r}')
 
-    print('Close the connection')
-    writer.close()
+    # print('Close the connection')
+    # writer.close()
 
-asyncio.run(tcp_echo_client('Hello World!'))
+if __name__ == '__main__':
+    while True:
+        asyncio.run(tcp_echo_client())
+        #time.sleep(1)

@@ -8,16 +8,15 @@ async def handle_echo(reader, writer):
 
     print(f"Received {message!r} from {addr!r}")
 
-    sensor_data = 456
-    data = data + sensor_data.to_bytes(32,byteorder='big', signed=True)
-    message = message + str(sensor_data)
+    data = data
+    message = message
 
     print(f"Send: {message!r}")
     writer.write(data)
     await writer.drain()
 
-    print("Close the connection")
-    writer.close()
+    #print("Close the connection")
+    #writer.close()
 
 async def main():
     server = await asyncio.start_server(
