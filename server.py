@@ -1,22 +1,25 @@
 import asyncio
+import sensor_mock
 
 async def handle_echo(reader, writer):
     data = await reader.read(100)
     message = data.decode()
 
+    sensor = sensor_mock.main()
+    print('sensor', sensor)
+
+    data = sensor.encode()
+
     addr = writer.get_extra_info('peername')
 
     print(f"Received {message!r} from {addr!r}")
-
-    data = data
-    message = message
 
     print(f"Send: {message!r}")
     writer.write(data)
     await writer.drain()
 
-    #print("Close the connection")
-    #writer.close()
+    print("Close the connection")
+    writer.close()
 
 async def main():
     server = await asyncio.start_server(

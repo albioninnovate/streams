@@ -20,6 +20,8 @@ async def tcp_echo_client(message):
 #asyncio.run(tcp_echo_client('Hello World!'))
 
 if __name__ == '__main__':
+
+    # generate some predictable data to be sent and received
     number = 1
     range = 100
     step = 1
